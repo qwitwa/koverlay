@@ -25,13 +25,9 @@ OverlayView::OverlayView(OverlayConfig *cfg, QWindow *parent)
     ls->setLayer(LayerShellQt::Window::LayerOverlay); // or LayerTop if needed
     ls->setKeyboardInteractivity(LayerShellQt::Window::KeyboardInteractivityNone);
     ls->setExclusiveZone(0);
-    ls->setAnchors(LayerShellQt::Window::Anchors(
-        LayerShellQt::Window::AnchorTop
-        | LayerShellQt::Window::AnchorBottom
-        | LayerShellQt::Window::AnchorLeft
-        | LayerShellQt::Window::AnchorRight));
 
     setSource(QUrl(QStringLiteral("qrc:/koverlay/Overlay.qml")));
+    setResizeMode(QQuickView::SizeViewToRootObject);
     if (status() == QQuickView::Error) {
         for (const auto &e : errors()) qWarning() << e.toString();
     }
@@ -53,12 +49,14 @@ void OverlayView::selectScreenByIndex(int idx) {
 void OverlayView::toggle() { setVisible(!isVisible()); }
 
 void OverlayView::showOverlay() {
-    setGeometry(screen()->geometry());
-    showFullScreen();
+    // Do NOT make the window fullscreen or set it to screen geometry here.
+    // LayerShell will position the content-sized window according to anchors/margins.
+    show();
     raise();
     requestActivate();
     applyEmptyInputRegion();
 }
+
 
 void OverlayView::hideOverlay() { hide(); }
 

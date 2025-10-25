@@ -10,7 +10,7 @@
 # KOverlay
 
 Click‑through, always‑on‑top **overlay panel** for Wayland desktops (tested on **Fedora KDE/Plasma Wayland**) built with **Qt 6 + QML + LayerShellQt**.  
-Perfect for **sticky notes**, **cheat sheets**, **keybindings**, or any text you want visible above apps — without stealing focus. Supports **live‑reloading** from a config file.
+Perfect for **sticky notes**, **cheat sheets**, **keybindings**, or any text you want visible above apps - without stealing focus. Supports **live‑reloading** from a config file.
 
 <p align="center">
   <i>Toggle from a global shortcut, stays above everything, passes all mouse/keyboard through.</i>
@@ -36,6 +36,7 @@ Perfect for **sticky notes**, **cheat sheets**, **keybindings**, or any text you
 - 🧼 **Click‑through**: never steals input; all clicks/keys go to the app underneath.
 - 📌 **Always on top**: pinned using `layer-shell` on the compositor.
 - 🖥️ **Multi‑monitor aware**: choose target monitor with `--screen-index`.
+- 🧭 **NEW: Custom position**: In config.ini it is now possible to specify position (`top-left/right`, `bottom-left/right` or `custom` via x,y coordinates.
 - ⚡ **Hot‑reloading config**: edit `~/.config/koverlay/config.ini` and changes apply immediately.
 - ✍️ **Customizable text**: font family, size, color, bold.
 - 🌫️ **Panel background opacity**: fade the backdrop while keeping text fully opaque.
@@ -143,6 +144,42 @@ panelOpacity=0.35
 [overlay]
 text=Line 1\nLine 2\nLine 3
 fontSize=18
+```
+
+**D) Full config demo showing all features**
+```ini
+[overlay]
+#text="""
+#⌨ Keybindings:
+#• Super+Enter — Terminal
+#• Ctrl+Alt+H — Toggle Overlay
+
+#Things to do:
+#• Buy milk
+#"""
+
+# this now hot-reloads as well
+textFile=~/.config/koverlay/overlay-list.txt
+
+# one of: top-left | top-right | bottom-left | bottom-right | custom
+position=bottom-left
+
+
+# margins (applied depending on position); defaults 16
+marginTop=16
+marginRight=16
+marginBottom=16
+marginLeft=16
+
+# used only when position=custom (offsets from top-left)
+x=80
+y=60
+
+fontFamily=Fira Code
+fontSize=18
+bold=false
+textColor=#40E0D0
+panelOpacity=0.75
 ```
 
 ---

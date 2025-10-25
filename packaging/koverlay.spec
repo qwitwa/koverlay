@@ -1,5 +1,5 @@
 Name:           koverlay
-Version:        1.0.0
+Version:        1.0.1
 Release:        1%{?dist}
 Summary:        Click-through overlay for Wayland (Qt 6 + LayerShellQt)
 
@@ -46,5 +46,10 @@ Useful for sticky notes, cheat sheets, and keybindings. Supports hot-reloading c
 %{_datadir}/applications/koverlay.desktop
 
 %changelog
+* Sat Oct 25 2025 Erik - 1.0.1-1
+- New: configurable overlay position (top-left, top-right, bottom-left, bottom-right, custom x/y)
+- New: hot-reload when using `textFile=` (watches file and parent dir; handles atomic saves)
+- Tweak: trim a single trailing newline when reading `textFile` to avoid extra blank line in UI
+- Build: bump project to 1.0.1 (CMake, CPack/RPM)
 * Sat Oct 04 2025 Erik - 1.0.0-1
 - Initial build
